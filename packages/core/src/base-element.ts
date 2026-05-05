@@ -2,10 +2,10 @@ import { getBadge } from './registry.js';
 import type { Product, Theme } from './types.js';
 
 const SHARED_STYLE = `
-:host { display: inline-block; line-height: 0; }
+:host { display: inline-block; line-height: 0; height: 40px; }
 :host([hidden]) { display: none; }
-a { display: inline-block; line-height: 0; color: inherit; text-decoration: none; }
-svg { display: block; width: 100%; height: auto; }
+a { display: inline-block; line-height: 0; color: inherit; text-decoration: none; height: 100%; }
+svg { display: block; height: 100%; width: auto; }
 `;
 
 const DEFAULT_LABELS: Record<Product, string> = {
