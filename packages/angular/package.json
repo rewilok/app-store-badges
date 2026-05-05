@@ -1,0 +1,51 @@
+{
+  "name": "@rewilok/app-store-badges-angular",
+  "version": "0.1.0",
+  "description": "Angular 16+ standalone components for @rewilok/app-store-badges.",
+  "keywords": ["app-store", "google-play", "badge", "angular"],
+  "license": "Apache-2.0",
+  "sideEffects": false,
+  "main": "./dist/fesm2022/rewilok-app-store-badges-angular.mjs",
+  "module": "./dist/fesm2022/rewilok-app-store-badges-angular.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    "./package.json": {
+      "default": "./package.json"
+    },
+    ".": {
+      "types": "./dist/index.d.ts",
+      "esm2022": "./dist/esm2022/rewilok-app-store-badges-angular.mjs",
+      "esm": "./dist/esm2022/rewilok-app-store-badges-angular.mjs",
+      "default": "./dist/fesm2022/rewilok-app-store-badges-angular.mjs"
+    }
+  },
+  "files": ["dist", "README.md", "LICENSE", "NOTICE"],
+  "scripts": {
+    "build": "ng-packagr -p ng-package.json",
+    "typecheck": "tsc -p tsconfig.lib.json --noEmit",
+    "prepublishOnly": "node ../../scripts/sync-license.mjs"
+  },
+  "dependencies": {
+    "@rewilok/app-store-badges": "workspace:*",
+    "tslib": "^2.6.0"
+  },
+  "peerDependencies": {
+    "@angular/core": ">=16",
+    "@angular/common": ">=16",
+    "@angular/platform-browser": ">=16"
+  },
+  "devDependencies": {
+    "@angular/common": "^17.3.0",
+    "@angular/compiler": "^17.3.0",
+    "@angular/compiler-cli": "^17.3.0",
+    "@angular/core": "^17.3.0",
+    "@angular/platform-browser": "^17.3.0",
+    "ng-packagr": "^17.3.0",
+    "rxjs": "^7.8.1",
+    "typescript": "~5.4.5",
+    "zone.js": "^0.14.4"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

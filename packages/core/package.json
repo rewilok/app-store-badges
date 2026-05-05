@@ -1,0 +1,61 @@
+{
+  "name": "@rewilok/app-store-badges",
+  "version": "0.1.0",
+  "description": "Official App Store and Google Play badges as framework-agnostic web components, with locale-aware asset selection.",
+  "keywords": [
+    "app-store",
+    "google-play",
+    "badge",
+    "web-component",
+    "custom-element",
+    "i18n",
+    "locale"
+  ],
+  "license": "Apache-2.0",
+  "type": "module",
+  "sideEffects": [
+    "./dist/elements.js"
+  ],
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./elements": {
+      "types": "./dist/elements.d.ts",
+      "import": "./dist/elements.js"
+    },
+    "./registry": {
+      "types": "./dist/registry.d.ts",
+      "import": "./dist/registry.js"
+    },
+    "./assets/*": "./assets/*",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "assets",
+    "README.md",
+    "LICENSE",
+    "NOTICE"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run --passWithNoTests",
+    "prepublishOnly": "node ../../scripts/sync-license.mjs"
+  },
+  "devDependencies": {
+    "tsup": "^8.3.0",
+    "typescript": "^5.6.2",
+    "vitest": "^2.1.1",
+    "jsdom": "^25.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

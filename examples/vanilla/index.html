@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>app-store-badges vanilla demo</title>
+    <style>
+      body {
+        font-family: system-ui, sans-serif;
+        max-width: 52rem;
+        margin: 3rem auto;
+        padding: 0 1.5rem;
+        line-height: 1.5;
+      }
+      section {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+        padding: 1rem;
+        border: 1px solid #e5e7eb;
+        border-radius: 0.75rem;
+        margin: 1rem 0;
+      }
+      section[data-dark] {
+        background: #111;
+        border-color: #111;
+        color: white;
+      }
+      app-store-badge,
+      google-play-badge {
+        width: 180px;
+      }
+      code {
+        background: #f3f4f6;
+        padding: 0 0.3rem;
+        border-radius: 0.25rem;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>app-store-badges — vanilla demo</h1>
+    <p>
+      Import <code>@rewilok/app-store-badges/elements</code> once and use the custom
+      elements anywhere. No framework required.
+    </p>
+
+    <section>
+      <app-store-badge locale="de" href="https://apps.apple.com/de/app/id123"></app-store-badge>
+      <google-play-badge locale="de" href="https://play.google.com/store/apps/details?id=x"></google-play-badge>
+      <span>Explicit <code>locale="de"</code></span>
+    </section>
+
+    <section>
+      <app-store-badge locale="pt" fallback="en"></app-store-badge>
+      <google-play-badge locale="pt" fallback="en"></google-play-badge>
+      <span>
+        <code>locale="pt"</code> → resolves to <em>pt-BR</em> via the best-fit matcher
+      </span>
+    </section>
+
+    <section data-dark>
+      <app-store-badge theme="white" locale="fr-CA"></app-store-badge>
+      <google-play-badge locale="fr-CA"></google-play-badge>
+      <span>
+        Apple <code>theme="white"</code>; Google ignores the theme prop (ships only
+        black). Locale <code>fr-CA</code>.
+      </span>
+    </section>
+
+    <section>
+      <app-store-badge locale="sl"></app-store-badge>
+      <app-store-badge locale="sl-SI"></app-store-badge>
+      <span>
+        <code>sl</code> and <code>sl-SI</code> are distinct Slovenian assets from
+        Apple; each key maps to its own file.
+      </span>
+    </section>
+
+    <section>
+      <app-store-badge></app-store-badge>
+      <google-play-badge></google-play-badge>
+      <span>No <code>locale</code> attribute → uses <code>navigator.languages</code></span>
+    </section>
+
+    <script type="module">
+      // Resolve the built package at runtime. When installed via npm you'd
+      // simply write: import '@rewilok/app-store-badges/elements';
+      import '../../packages/core/dist/elements.js';
+    </script>
+  </body>
+</html>

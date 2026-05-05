@@ -1,0 +1,33 @@
+{
+  "name": "app-store-badges-monorepo",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Cross-framework, tree-shakeable component library for the official App Store and Google Play badges.",
+  "type": "module",
+  "packageManager": "pnpm@10.33.1",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build:assets": "node scripts/build-assets.mjs",
+    "build": "pnpm -r --filter './packages/*' build",
+    "clean": "pnpm -r exec rimraf dist",
+    "typecheck": "pnpm -r --filter './packages/*' typecheck",
+    "test": "pnpm -r --filter './packages/*' test",
+    "changeset": "changeset",
+    "version-packages": "changeset version",
+    "release": "pnpm build && changeset publish"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.31.0",
+    "@types/node": "^22.7.0",
+    "rimraf": "^6.0.1",
+    "tsup": "^8.3.0",
+    "typescript": "^5.6.2"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
+  }
+}

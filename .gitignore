@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.pnpm-store/
+.DS_Store
+*.log
+_temp_apple_store_badges/
+_temp_google_play_badges/
+
+# LICENSE + NOTICE are synced into each package by scripts/sync-license.mjs
+# (run via `prepublishOnly`). The canonical copies live at the repo root.
+packages/*/LICENSE
+packages/*/NOTICE
