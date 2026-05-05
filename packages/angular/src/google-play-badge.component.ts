@@ -10,9 +10,9 @@ import type { Product } from '@rewilok/app-store-badges';
   imports: [CommonModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
   styles: [
-    ':host { display: inline-block; line-height: 0; }',
-    'a, span { display: inline-block; line-height: 0; color: inherit; text-decoration: none; }',
-    ':host ::ng-deep svg { display: block; width: 100%; height: auto; }',
+    ':host { display: inline-block; line-height: 0; height: 40px; }',
+    'a, span { display: inline-block; line-height: 0; color: inherit; text-decoration: none; height: 100%; }',
+    ':host ::ng-deep svg { display: block; height: 100%; width: auto; }',
   ],
   template: `
     <a

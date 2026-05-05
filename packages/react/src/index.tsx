@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import type { CSSProperties, HTMLAttributes, ReactNode } from 'react';
-import { getBadge, resolveLocale } from '@rewilok/app-store-badges/registry';
+import { getBadge, resolveLocale, withDefaultBadgeStyle } from '@rewilok/app-store-badges/registry';
 import type { Product, Theme } from '@rewilok/app-store-badges/registry';
 
 export interface BadgeProps extends Omit<HTMLAttributes<HTMLElement>, 'children'> {
@@ -69,10 +69,11 @@ function BadgeInternal({
   const wrapperStyle: CSSProperties = {
     display: 'inline-block',
     lineHeight: 0,
+    height: 40,
     ...style,
   };
 
-  const svgMarkup = state?.svg ?? null;
+  const svgMarkup = state?.svg ? withDefaultBadgeStyle(state.svg) : null;
 
   if (href) {
     return (

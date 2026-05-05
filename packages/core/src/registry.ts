@@ -68,3 +68,21 @@ export async function getBadge(
   const mod = await loader();
   return { locale, svg: mod.default };
 }
+
+const SVG_OPEN_RE = /<svg\b([^>]*)>/;
+const HAS_STYLE = /\sstyle\s*=/i;
+
+/**
+ * Inject a presentation `style` on the root `<svg>` so it fills its container
+ * at a consistent height regardless of the source asset's intrinsic
+ * dimensions. Intended for framework wrappers that inline the SVG via
+ * `innerHTML` (where shadow-DOM / scoped CSS can't reach). Idempotent — a
+ * no-op when the root `<svg>` already carries a `style=` attribute.
+ */
+export function withDefaultBadgeStyle(svg: string): string {
+  const m = svg.match(SVG_OPEN_RE);
+  const attrs = m?.[1];
+  if (attrs === undefined) return svg;
+  if (HAS_STYLE.test(attrs)) return svg;
+  return svg.replace(SVG_OPEN_RE, `<svg style="display:block;height:100%;width:auto"${attrs}>`);
+}

@@ -1,5 +1,5 @@
 import { defineComponent, h, onMounted, ref, watch, type PropType, type VNode } from 'vue';
-import { getBadge, resolveLocale } from '@rewilok/app-store-badges/registry';
+import { getBadge, resolveLocale, withDefaultBadgeStyle } from '@rewilok/app-store-badges/registry';
 import type { Product, Theme } from '@rewilok/app-store-badges/registry';
 
 interface InternalState {
@@ -45,7 +45,7 @@ function createBadgeComponent(product: Product, defaultTheme: Theme, defaultLabe
         const svg = state.value?.svg;
         const locale = state.value?.locale ?? initialLocale.value;
         const ariaLabel = props.ariaLabel ?? defaultLabel;
-        const style = { display: 'inline-block', lineHeight: 0 };
+        const style = { display: 'inline-block', lineHeight: 0, height: '40px' };
 
         const inner = svg
           ? h('template', {}, []) // placeholder — innerHTML set via domProps
@@ -55,7 +55,7 @@ function createBadgeComponent(product: Product, defaultTheme: Theme, defaultLabe
           'data-locale': locale,
           style,
         };
-        if (svg) attrs.innerHTML = svg;
+        if (svg) attrs.innerHTML = withDefaultBadgeStyle(svg);
 
         if (props.href) {
           return h(
