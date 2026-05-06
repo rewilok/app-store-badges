@@ -9,6 +9,15 @@
     "angular"
   ],
   "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rewilok/app-store-badges.git",
+    "directory": "packages/angular"
+  },
+  "homepage": "https://github.com/rewilok/app-store-badges/tree/main/packages/angular#readme",
+  "bugs": {
+    "url": "https://github.com/rewilok/app-store-badges/issues"
+  },
   "sideEffects": false,
   "main": "./dist/fesm2022/rewilok-app-store-badges-angular.mjs",
   "module": "./dist/fesm2022/rewilok-app-store-badges-angular.mjs",

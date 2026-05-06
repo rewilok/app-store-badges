@@ -9,6 +9,15 @@
     "react"
   ],
   "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rewilok/app-store-badges.git",
+    "directory": "packages/react"
+  },
+  "homepage": "https://github.com/rewilok/app-store-badges/tree/main/packages/react#readme",
+  "bugs": {
+    "url": "https://github.com/rewilok/app-store-badges/issues"
+  },
   "type": "module",
   "sideEffects": false,
   "main": "./dist/index.js",

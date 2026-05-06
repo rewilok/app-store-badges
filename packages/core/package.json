@@ -12,6 +12,15 @@
     "locale"
   ],
   "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rewilok/app-store-badges.git",
+    "directory": "packages/core"
+  },
+  "homepage": "https://github.com/rewilok/app-store-badges#readme",
+  "bugs": {
+    "url": "https://github.com/rewilok/app-store-badges/issues"
+  },
   "type": "module",
   "sideEffects": [
     "./dist/elements.js"
