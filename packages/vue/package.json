@@ -1,8 +1,13 @@
 {
   "name": "@rewilok/app-store-badges-vue",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Vue 3 bindings for @rewilok/app-store-badges.",
-  "keywords": ["app-store", "google-play", "badge", "vue"],
+  "keywords": [
+    "app-store",
+    "google-play",
+    "badge",
+    "vue"
+  ],
   "license": "Apache-2.0",
   "type": "module",
   "sideEffects": false,
@@ -15,7 +20,12 @@
       "import": "./dist/index.js"
     }
   },
-  "files": ["dist", "README.md", "LICENSE", "NOTICE"],
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "NOTICE"
+  ],
   "scripts": {
     "build": "tsup",
     "typecheck": "tsc --noEmit",
