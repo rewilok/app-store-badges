@@ -1,8 +1,13 @@
 {
   "name": "@rewilok/app-store-badges-angular",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Angular 16+ standalone components for @rewilok/app-store-badges.",
-  "keywords": ["app-store", "google-play", "badge", "angular"],
+  "keywords": [
+    "app-store",
+    "google-play",
+    "badge",
+    "angular"
+  ],
   "license": "Apache-2.0",
   "sideEffects": false,
   "main": "./dist/fesm2022/rewilok-app-store-badges-angular.mjs",
@@ -19,7 +24,12 @@
       "default": "./dist/fesm2022/rewilok-app-store-badges-angular.mjs"
     }
   },
-  "files": ["dist", "README.md", "LICENSE", "NOTICE"],
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "NOTICE"
+  ],
   "scripts": {
     "build": "ng-packagr -p ng-package.json",
     "typecheck": "tsc -p tsconfig.lib.json --noEmit",
