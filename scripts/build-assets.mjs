@@ -4,16 +4,19 @@
 //
 // Usage:  node scripts/build-assets.mjs
 //
-// After a successful run, the `_temp_*` folders are removed.
+// Reads from the extracted vendor folders at the repo root (kept untracked
+// via .gitignore). The source folders are left in place after the run.
 
 import { readdirSync, statSync, readFileSync, writeFileSync, mkdirSync, rmSync, existsSync } from 'node:fs';
 import { join, dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { minifySvg } from './lib/minify-svg.mjs';
+import { stripRootSvgSize } from './lib/strip-root-svg-size.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, '..');
-const APPLE_SRC = join(ROOT, '_temp_apple_store_badges');
-const GOOGLE_SRC = join(ROOT, '_temp_google_play_badges');
+const APPLE_SRC = join(ROOT, 'Download-on-the-App-Store');
+const GOOGLE_SRC = join(ROOT, 'Get it on Google Play Badges/Digital/svg');
 const CORE = join(ROOT, 'packages/core');
 const ASSETS_OUT = join(CORE, 'assets');
 const MANIFEST_OUT = join(CORE, 'src/generated/manifest.ts');
@@ -183,9 +186,9 @@ function ensureDir(p) {
 }
 
 function writeSvg(srcPath, outPath) {
-  const buf = readFileSync(srcPath);
+  const raw = readFileSync(srcPath, 'utf8');
   ensureDir(dirname(outPath));
-  writeFileSync(outPath, buf);
+  writeFileSync(outPath, stripRootSvgSize(minifySvg(raw)));
 }
 
 // ─── Apple ──────────────────────────────────────────────────────────────────
@@ -298,7 +301,9 @@ export const googlePlayBlack: LocaleMap = ${toMap(google.black, 'google_play_bad
 
 function main() {
   if (!existsSync(APPLE_SRC) && !existsSync(GOOGLE_SRC)) {
-    console.error('No _temp_* source folders found. Nothing to do.');
+    console.error(
+      'No vendor source folders found at repo root. Expected `Download-on-the-App-Store/` and/or `Get it on Google Play Badges/`. Nothing to do.',
+    );
     process.exit(1);
   }
 
@@ -324,11 +329,6 @@ function main() {
     console.error('FATAL: an `en`/`en-US` asset is missing from one of the products.');
     process.exit(2);
   }
-
-  // Delete the temp sources only after a clean run.
-  rmSync(APPLE_SRC, { recursive: true, force: true });
-  rmSync(GOOGLE_SRC, { recursive: true, force: true });
-  console.log('Removed _temp_* source folders.');
 }
 
 main();

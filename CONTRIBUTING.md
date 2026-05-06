@@ -32,11 +32,32 @@ pnpm build:assets   # one-shot; processes vendor badge SVGs into packages/core/a
 pnpm build
 ```
 
-`build:assets` reads the raw `_temp_*` vendor dumps (Apple/Google brand-resource downloads) and emits the locale-keyed asset tree under `packages/core/assets/`. You only need to run it again when refreshing the badge artwork.
+`build:assets` reads the raw vendor dumps (Apple/Google brand-resource downloads) extracted at the repo root and emits the locale-keyed asset tree under `packages/core/assets/`. You only need to run it again when refreshing the badge artwork.
 
 ### Refreshing badge artwork
 
-1. Drop the vendor zip(s) under `_temp_*` directories at the repo root following the existing naming convention.
+1. Extract the Apple and Google vendor zips at the repo root, **keeping their original folder names and structure** (both are listed in `.gitignore`, so the raw dumps are not committed):
+
+   ```
+   Download-on-the-App-Store/
+     AR/                                       # one folder per locale (mapped in scripts/build-assets.mjs)
+       Download_on_App_Store/
+         Black_lockup/
+           SVG/Download_on_the_App_Store_Badge_AR_RGB_blk_102417.svg
+           EPS/                                # non-SVG sibling — skipped by the build
+         White_lockup/
+           SVG/…wht….svg
+           EPS/                                # skipped
+     …                                         # remaining locale folders follow the same shape
+
+   Get it on Google Play Badges/
+     Digital/
+       svg/
+         GetItOnGooglePlay_Badge_Web_color_Afrikaans.svg   # one flat file per language
+         …
+   ```
+
+   The build only reads `*.svg` files — `EPS/` and any other non-SVG siblings are ignored. A handful of older Apple locales ship as `Preferred_Badge`/`Alternative_Badge` instead of `Black_lockup`/`White_lockup`; the script detects both shapes automatically.
 2. Run `pnpm build:assets`.
 3. Inspect the diff under `packages/core/assets/` and `packages/core/src/generated/` — committed asset changes should be reviewed for unintended visual or naming drift.
 4. Regenerate the build (`pnpm build`) and run the test suite.

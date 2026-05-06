@@ -51,9 +51,32 @@ Primary sources — read these before shipping:
 
 ```sh
 pnpm install
-pnpm build:assets   # one-shot; processes _temp_* vendor dumps into packages/core/assets/
+pnpm build:assets   # one-shot; processes the vendor dumps into packages/core/assets/
 pnpm build
 ```
+
+### Refreshing badge artwork
+
+Extract the Apple and Google vendor zips at the repo root, **keeping the original folder names and structure**. Both folders are listed in `.gitignore` so the raw dumps stay out of version control. Example layout, illustrated with the first locale of each set:
+
+```
+Download-on-the-App-Store/
+  AR/                                       # one folder per locale (mapped in scripts/build-assets.mjs)
+    Download_on_App_Store/
+      Black_lockup/
+        SVG/Download_on_the_App_Store_Badge_AR_RGB_blk_102417.svg
+      White_lockup/
+        SVG/Download_on_the_App_Store_Badge_AR_RGB_wht_102417.svg
+  …
+
+Get it on Google Play Badges/
+  Digital/
+    svg/
+      GetItOnGooglePlay_Badge_Web_color_Afrikaans.svg   # one flat file per language
+      …
+```
+
+The build only reads `*.svg` files — `EPS/` and any other non-SVG siblings are ignored. A handful of older Apple locales ship as `Preferred_Badge`/`Alternative_Badge` instead of `Black_lockup`/`White_lockup`; the script detects both shapes automatically. Then run `pnpm build:assets` and review the diff under `packages/core/assets/` and `packages/core/src/generated/` before committing. See [CONTRIBUTING.md](./CONTRIBUTING.md#refreshing-badge-artwork) for the full workflow.
 
 ## License and trademarks
 

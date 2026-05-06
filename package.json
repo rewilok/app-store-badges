@@ -10,6 +10,7 @@
   },
   "scripts": {
     "build:assets": "node scripts/build-assets.mjs",
+    "normalize:svgs": "node scripts/normalize-svgs.mjs",
     "build": "pnpm -r --filter './packages/*' build",
     "clean": "pnpm -r exec rimraf dist",
     "typecheck": "pnpm -r --filter './packages/*' typecheck",

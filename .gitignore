@@ -3,8 +3,8 @@ dist/
 .pnpm-store/
 .DS_Store
 *.log
-_temp_apple_store_badges/
-_temp_google_play_badges/
+Download-on-the-App-Store/
+Get it on Google Play Badges/
 
 # LICENSE + NOTICE are synced into each package by scripts/sync-license.mjs
 # (run via `prepublishOnly`). The canonical copies live at the repo root.
