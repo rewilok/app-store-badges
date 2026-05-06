@@ -2,89 +2,278 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>app-store-badges vanilla demo</title>
+    <title>app-store-badges — vanilla showcase</title>
     <style>
+      :root {
+        --fg: #111;
+        --muted: #4b5563;
+        --rule: #e5e7eb;
+        --chip-bg: #f3f4f6;
+        --chip-fg: #111;
+      }
+      * { box-sizing: border-box; }
+      html, body { margin: 0; }
       body {
-        font-family: system-ui, sans-serif;
-        max-width: 52rem;
-        margin: 3rem auto;
-        padding: 0 1.5rem;
+        font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
         line-height: 1.5;
+        color: var(--fg);
+        background: #fff;
       }
-      section {
-        display: flex;
-        gap: 1rem;
-        align-items: center;
-        padding: 1rem;
-        border: 1px solid #e5e7eb;
-        border-radius: 0.75rem;
-        margin: 1rem 0;
-      }
-      section[data-dark] {
-        background: #111;
-        border-color: #111;
-        color: white;
-      }
-      app-store-badge,
-      google-play-badge {
-        width: 180px;
-      }
+      a { color: inherit; }
       code {
-        background: #f3f4f6;
+        background: var(--chip-bg);
+        color: var(--chip-fg);
         padding: 0 0.3rem;
         border-radius: 0.25rem;
+        font-size: 0.9em;
       }
+      .wrap {
+        max-width: 72rem;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+      }
+      header.intro {
+        padding: 3rem 0 1.5rem;
+      }
+      header.intro h1 {
+        margin: 0 0 0.5rem;
+        font-size: 1.75rem;
+      }
+      header.intro p { margin: 0.25rem 0; color: var(--muted); }
+
+      .panel {
+        padding: 3rem 0;
+        border-top: 1px solid var(--rule);
+      }
+      .panel--light { background: #ffffff; color: #111; }
+      .panel--dark  { background: #0b0b0b; color: #f5f5f5; border-top-color: #0b0b0b; }
+      .panel--dark code {
+        background: #1f1f1f;
+        color: #f5f5f5;
+      }
+      .panel h2 {
+        margin: 0 0 0.25rem;
+        font-size: 1.25rem;
+      }
+      .panel h3 {
+        margin: 2rem 0 0.75rem;
+        font-size: 0.95rem;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: inherit;
+        opacity: 0.7;
+      }
+      .panel p.lede { margin: 0 0 1.25rem; opacity: 0.75; }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 1.25rem;
+      }
+      figure.cell {
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+      }
+      figure.cell app-store-badge,
+      figure.cell google-play-badge {
+        width: 180px;
+        display: block;
+      }
+      figure.cell figcaption {
+        font-size: 0.8rem;
+        opacity: 0.85;
+      }
+      figure.cell figcaption .note {
+        display: block;
+        font-size: 0.75rem;
+        opacity: 0.7;
+        margin-top: 0.15rem;
+      }
+
+      footer.features {
+        padding: 3rem 0;
+        border-top: 1px solid var(--rule);
+        background: #fff;
+        color: #111;
+      }
+      footer.features .row {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 1.5rem;
+        align-items: start;
+      }
+      footer.features figure {
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+      }
+      footer.features figcaption { font-size: 0.85rem; color: var(--muted); }
     </style>
   </head>
   <body>
-    <h1>app-store-badges — vanilla demo</h1>
-    <p>
-      Import <code>@rewilok/app-store-badges/elements</code> once and use the custom
-      elements anywhere. No framework required.
-    </p>
+    <header class="intro">
+      <div class="wrap">
+        <h1>app-store-badges — vanilla showcase</h1>
+        <p>
+          Pre-publish eyeball page. Top half renders badges on white; bottom
+          half on black. Same locale matrix on both so region-distinct assets
+          (<code>pt-BR</code> vs <code>pt-PT</code>, <code>fr</code> vs
+          <code>fr-CA</code>, <code>sl</code> vs <code>sl-SI</code>) can be
+          compared side-by-side.
+        </p>
+        <p>
+          Vanilla usage:
+          <code>import '@rewilok/app-store-badges/elements'</code>, then drop
+          <code>&lt;app-store-badge&gt;</code> /
+          <code>&lt;google-play-badge&gt;</code> anywhere.
+        </p>
+      </div>
+    </header>
 
-    <section>
-      <app-store-badge locale="de" href="https://apps.apple.com/de/app/id123"></app-store-badge>
-      <google-play-badge locale="de" href="https://play.google.com/store/apps/details?id=x"></google-play-badge>
-      <span>Explicit <code>locale="de"</code></span>
+    <section class="panel panel--light" aria-label="Badges on white background">
+      <div class="wrap">
+        <h2>On white</h2>
+        <p class="lede">
+          App Store with <code>theme="black"</code> (default) and Google Play
+          (ships only black). Caption shows the requested locale; if the
+          requested key isn't shipped for a product, the matcher resolves to the
+          closest available — that's expected behavior, eyeball it here.
+        </p>
+
+        <h3>App Store · theme=&ldquo;black&rdquo;</h3>
+        <div class="grid" data-grid="apple-light"></div>
+
+        <h3>Google Play</h3>
+        <div class="grid" data-grid="google-light"></div>
+      </div>
     </section>
 
-    <section>
-      <app-store-badge locale="pt" fallback="en"></app-store-badge>
-      <google-play-badge locale="pt" fallback="en"></google-play-badge>
-      <span>
-        <code>locale="pt"</code> → resolves to <em>pt-BR</em> via the best-fit matcher
-      </span>
+    <section class="panel panel--dark" aria-label="Badges on black background">
+      <div class="wrap">
+        <h2>On black</h2>
+        <p class="lede">
+          App Store with <code>theme="white"</code>; Google Play stays black
+          (no white variant ships) so this row also serves as a contrast check
+          for dark-themed sites.
+        </p>
+
+        <h3>App Store · theme=&ldquo;white&rdquo;</h3>
+        <div class="grid" data-grid="apple-dark"></div>
+
+        <h3>Google Play (black on black)</h3>
+        <div class="grid" data-grid="google-dark"></div>
+      </div>
     </section>
 
-    <section data-dark>
-      <app-store-badge theme="white" locale="fr-CA"></app-store-badge>
-      <google-play-badge locale="fr-CA"></google-play-badge>
-      <span>
-        Apple <code>theme="white"</code>; Google ignores the theme prop (ships only
-        black). Locale <code>fr-CA</code>.
-      </span>
-    </section>
+    <footer class="features">
+      <div class="wrap">
+        <h2 style="margin:0 0 0.25rem; font-size:1.25rem;">Feature smoke tests</h2>
+        <p class="lede" style="color:var(--muted); margin:0 0 1.25rem;">
+          Other public attributes the custom elements accept.
+        </p>
+        <div class="row">
+          <figure>
+            <app-store-badge
+              locale="en-US"
+              href="https://apps.apple.com/us/app/id000000000"
+            ></app-store-badge>
+            <google-play-badge
+              locale="en"
+              href="https://play.google.com/store/apps/details?id=com.example"
+            ></google-play-badge>
+            <figcaption>
+              <strong>href</strong> — wraps the SVG in an anchor. Right-click →
+              &ldquo;Open link&rdquo; to confirm.
+            </figcaption>
+          </figure>
 
-    <section>
-      <app-store-badge locale="sl"></app-store-badge>
-      <app-store-badge locale="sl-SI"></app-store-badge>
-      <span>
-        <code>sl</code> and <code>sl-SI</code> are distinct Slovenian assets from
-        Apple; each key maps to its own file.
-      </span>
-    </section>
+          <figure>
+            <app-store-badge locale="xx-YY" fallback="en"></app-store-badge>
+            <google-play-badge locale="xx-YY" fallback="en"></google-play-badge>
+            <figcaption>
+              <strong>fallback</strong> — bogus <code>locale="xx-YY"</code>
+              falls back to <code>en</code> instead of rendering empty.
+            </figcaption>
+          </figure>
 
-    <section>
-      <app-store-badge></app-store-badge>
-      <google-play-badge></google-play-badge>
-      <span>No <code>locale</code> attribute → uses <code>navigator.languages</code></span>
-    </section>
+          <figure>
+            <app-store-badge></app-store-badge>
+            <google-play-badge></google-play-badge>
+            <figcaption>
+              <strong>No locale</strong> — resolves from
+              <code>navigator.languages</code>. Result depends on your browser
+              language settings.
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </footer>
 
     <script type="module">
-      // Resolve the built package at runtime. When installed via npm you'd
-      // simply write: import '@rewilok/app-store-badges/elements';
+      // When installed via npm: import '@rewilok/app-store-badges/elements';
       import '../../packages/core/dist/elements.js';
+
+      // Locale matrix — exercises the matcher's three tiers (exact, preference
+      // chain, language-only) plus visually distinct scripts. App Store and
+      // Google Play use different naming conventions for some keys; the
+      // matcher absorbs the difference, and the eyeball reveals any gaps.
+      const locales = [
+        { code: 'en-US', note: 'baseline' },
+        { code: 'de' },
+        { code: 'fr', note: 'bare → preference chain' },
+        { code: 'fr-CA', note: 'distinct from fr' },
+        { code: 'es' },
+        { code: 'es-MX', note: 'distinct from es' },
+        { code: 'pt-BR' },
+        { code: 'pt-PT', note: 'distinct from pt-BR' },
+        { code: 'sl' },
+        { code: 'sl-SI', note: 'distinct from sl (Apple ships both)' },
+        { code: 'he-IL', note: 'RTL + region' },
+        { code: 'ar', note: 'RTL' },
+        { code: 'ja' },
+        { code: 'ko' },
+        { code: 'zh-CN' },
+        { code: 'zh-TW' },
+        { code: 'hi-IN' },
+        { code: 'bn-IN' },
+        { code: 'ta-IN' },
+      ];
+
+      function cell({ tag, attrs, label, note }) {
+        const attrStr = Object.entries(attrs)
+          .map(([k, v]) => `${k}="${v}"`)
+          .join(' ');
+        const noteHtml = note ? `<span class="note">${note}</span>` : '';
+        return `
+          <figure class="cell">
+            <${tag} ${attrStr}></${tag}>
+            <figcaption><code>${label}</code>${noteHtml}</figcaption>
+          </figure>
+        `;
+      }
+
+      function renderGrid(selector, tag, extraAttrs = {}) {
+        const html = locales
+          .map((l) =>
+            cell({
+              tag,
+              attrs: { locale: l.code, fallback: 'en', ...extraAttrs },
+              label: `locale="${l.code}"`,
+              note: l.note,
+            })
+          )
+          .join('');
+        document.querySelector(selector).innerHTML = html;
+      }
+
+      renderGrid('[data-grid="apple-light"]', 'app-store-badge', { theme: 'black' });
+      renderGrid('[data-grid="google-light"]', 'google-play-badge');
+      renderGrid('[data-grid="apple-dark"]', 'app-store-badge', { theme: 'white' });
+      renderGrid('[data-grid="google-dark"]', 'google-play-badge');
     </script>
   </body>
 </html>
