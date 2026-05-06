@@ -11,6 +11,7 @@ import { readdirSync, statSync, readFileSync, writeFileSync, mkdirSync, rmSync, 
 import { join, dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { minifySvg } from './lib/minify-svg.mjs';
+import { roundSvgViewBox } from './lib/round-svg-viewbox.mjs';
 import { stripRootSvgSize } from './lib/strip-root-svg-size.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -188,7 +189,7 @@ function ensureDir(p) {
 function writeSvg(srcPath, outPath) {
   const raw = readFileSync(srcPath, 'utf8');
   ensureDir(dirname(outPath));
-  writeFileSync(outPath, stripRootSvgSize(minifySvg(raw)));
+  writeFileSync(outPath, stripRootSvgSize(roundSvgViewBox(minifySvg(raw))));
 }
 
 // ─── Apple ──────────────────────────────────────────────────────────────────
