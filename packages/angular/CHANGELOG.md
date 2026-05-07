@@ -1,5 +1,13 @@
 # @rewilok/app-store-badges-angular
 
+## 0.1.3
+
+### Patch Changes
+
+- 53f928b: Expand the viewBox to fully contain drawn content before snapping to integers. Several Google Play vendor SVGs (e.g. English) ship with a background `<rect>` and rounded-corner border path that extends slightly past the declared viewBox. Once the canvas was integer-aligned with the device pixel grid, that overflow showed up as a hard cut on the right edge. The build now unions the vendor viewBox with the bounding box of every `<rect>` and `<path>`, then snaps via floor-min / ceil-max, so artwork is never clipped and never skewed.
+- Updated dependencies [53f928b]
+  - @rewilok/app-store-badges@0.1.3
+
 ## 0.1.2
 
 ### Patch Changes
