@@ -1,6 +1,6 @@
 {
   "name": "@rewilok/app-store-badges-angular",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Angular 16+ standalone components for @rewilok/app-store-badges.",
   "keywords": [
     "app-store",

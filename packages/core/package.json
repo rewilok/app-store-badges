@@ -1,6 +1,6 @@
 {
   "name": "@rewilok/app-store-badges",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Official App Store and Google Play badges as framework-agnostic web components, with locale-aware asset selection.",
   "keywords": [
     "app-store",
